@@ -54,4 +54,7 @@
       link: /plugins/module-plugins/
     - label: Go Plugin System
       link: /plugins/go-plugins/
-
+- label: Configuration
+  items:
+    - label: "Configuration File"
+      link: "/usage/configuration/"

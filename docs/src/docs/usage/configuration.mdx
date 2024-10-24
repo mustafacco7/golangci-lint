@@ -35,6 +35,72 @@ The configuration file can be validated with the JSON Schema: https://golangci-l
 
 { .ConfigurationExample }
 
+## Configuration File Properties
+
+The configuration file for `golangci-lint` includes the following properties:
+
+- `version`: The version of `golangci-lint` to use. This is a required field.
+- `name`: The name of the custom binary. This is an optional field with a default value of `custom-gcl`.
+- `destination`: The directory path used to store the custom binary. This is an optional field with a default value of `.`.
+- `plugins`: A list of plugins to integrate inside the custom binary. Each plugin can be specified with the following properties:
+  - `module`: The module name of the plugin.
+  - `import`: The import path to use for the plugin.
+  - `version`: The version of the module. This is required for modules available through a Go proxy.
+  - `path`: The path to the local module. This is required for local modules.
+  - `description`: A description of the plugin.
+
+## Examples
+
+Here are some examples of how to use the configuration file:
+
+### Example 1: Basic Configuration
+
+```yaml
+version: v1.56.2
+name: custom-golangci-lint
+destination: ./my/path/
+plugins:
+  - module: 'github.com/example/plugin3'
+    version: v1.2.3
+  - module: 'github.com/example/plugin4'
+    import: 'github.com/example/plugin4/foo'
+    version: v1.0.0
+  - module: 'github.com/example/plugin2'
+    path: /my/local/path/plugin2
+  - module: 'github.com/example/plugin1'
+    path: ./my/local/path/plugin1
+  - module: 'github.com/example/plugin2'
+    import: 'github.com/example/plugin4/foo'
+    path: /my/local/path/plugin2
+```
+
+### Example 2: Configuration with Descriptions
+
+```yaml
+version: v1.56.2
+name: custom-golangci-lint
+destination: ./my/path/
+description: This is a custom configuration for golangci-lint.
+plugins:
+  - module: 'github.com/example/plugin3'
+    version: v1.2.3
+    description: This is a plugin from a Go proxy.
+  - module: 'github.com/example/plugin4'
+    import: 'github.com/example/plugin4/foo'
+    version: v1.0.0
+    description: This is a plugin from a Go proxy with a specific import path.
+  - module: 'github.com/example/plugin2'
+    path: /my/local/path/plugin2
+    description: This is a plugin from a local source with an absolute path.
+  - module: 'github.com/example/plugin1'
+    path: ./my/local/path/plugin1
+    description: This is a plugin from a local source with a relative path.
+  - module: 'github.com/example/plugin2'
+    import: 'github.com/example/plugin4/foo'
+    path: /my/local/path/plugin2
+    description: This is a plugin from a local source with an absolute path and a specific import path.
+```
+
 ## Command-Line Options
 
 ```sh

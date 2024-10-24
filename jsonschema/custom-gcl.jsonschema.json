@@ -22,6 +22,10 @@
           },
           "type": "array",
           "description": "Plugins information."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the configuration file."
         }
       },
       "additionalProperties": false,
@@ -62,6 +66,10 @@
         "path": {
           "type": "string",
           "description": "Path to the local module.\nOnly for local module."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the plugin."
         }
       },
       "additionalProperties": false,
